@@ -20,9 +20,17 @@ public class Generate_Random_Pop {
 	    return binary;
 	}
 	
+<<<<<<< HEAD
 	public static String toBinary(int rand){
 	    String binary = "";
 	    while (rand > 0){
+=======
+	public static String toBinary(int rand)
+	{
+	    String binary = "";
+	    while (rand > 0)
+	    {
+>>>>>>> 26673209876e4f689e9081f0d1875c2238aca008
 	        binary =  ( (rand % 2 ) == 0 ? "0" : "1") +binary;
 	        rand = rand / 2;
 	    }

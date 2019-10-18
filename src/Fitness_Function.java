@@ -16,6 +16,10 @@ public class Fitness_Function {
 		System.out.println("weight " + w +" benefit " + b);
 		GA.W=w;
 		GA.B=b;
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 26673209876e4f689e9081f0d1875c2238aca008
 		return w;
 	}
 }
