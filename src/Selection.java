@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Selection {
 	public static void selection(String [] binary, int[] weights, int[] benefits){
@@ -8,31 +9,33 @@ public class Selection {
 			totalweight+=weights[i];
 			//System.out.println("weights "+ totalweight);
 		}
+		/*
 		for (int i=0 ; i< weights.length ; i++){
 			if (totalweight>0){
 			probability[i]=(float)weights[i]/(float)totalweight;}
 			else{
 				probability[i]=0;
 			}
-			
+			*/
 			//System.out.println("PROBAB"+probability[i] + "\n");
-		}
-		double partialsum=probability[0];
 		
-		 double Random= Math.random();
+		int partialsum=0;
 		
-		 for(int j=0 ; j<4 ; j++){
-			 if (partialsum>=Random){
+		Random rg = new Random();
+	    int Random = rg.nextInt(totalweight-1);
+	    
+		 for(int j=3 ; j>=0 ; j--){
+			 while(partialsum<=Random) {
+			 partialsum+=weights[j];
+			 }
+			
 				 choosenelement[j]=binary[j];
-			 }
-			 else {
-				 partialsum+=probability[j];
-			 }
-		 
-		}
+				
+		 } 
 		for(int h=0 ; h<4 ; h++){
 			System.out.println("choosen");
 			System.out.println(choosenelement[h]);
 		}
 	}
+	
 }
