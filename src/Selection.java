@@ -8,7 +8,7 @@ public class Selection {
 
     public Selection(int numOfInd) {
         this.numOfInd = numOfInd;
-        this.numOfSelection = 4;
+        this.numOfSelection = 4; // We will change this value later
     }
 
     public void doSelection(String[] binary, int[] fitnessValues) {
