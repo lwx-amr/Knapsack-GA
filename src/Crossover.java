@@ -5,7 +5,7 @@ public class Crossover {
 
 	// Variables
 	private double pc;
-	private int firstPointer, secondPointer, thirdPointer;
+	private int firstPointer, secondPointer;
 	private String[] individuals, offSprings;
 		
     // Take individuals
@@ -14,12 +14,11 @@ public class Crossover {
     	this.individuals = individuals;
     	this.firstPointer = 2;
     	this.secondPointer = 5; 
-    	this.thirdPointer = 7;
     	this.offSprings = new String[individuals.length];
     }
 
     // Perform single point crossover process
-    public void performCrossover(String type) {
+    public String [] performCrossover(String type) {
     	String offSpring1,offSpring2;
     	for(int i = 0; i < individuals.length ; i+=2) {
     		// Check crossover probability
@@ -39,7 +38,7 @@ public class Crossover {
     		offSprings[i] = offSpring1;
     		offSprings[i+1] = offSpring2;
     	}
-    	print();
+    	return offSprings;
     }
     
 

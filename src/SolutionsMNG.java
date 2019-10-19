@@ -6,22 +6,13 @@ public class SolutionsMNG {
     // Variables
     private int numOfInd, numOfInputs;
     private String[] individuals;
-    private int[] weights, benefits;
     
+    // Constructor
     public SolutionsMNG(int numOfIndividuals, int numOfInputs) {
         this.numOfInd = numOfIndividuals;
         this.numOfInputs = numOfInputs;
         this.individuals = new String[numOfInd];
-        this.weights = new int[numOfInputs];
-        weights[0] = 4;
-        weights[1] = 7;
-        weights[2] = 5;
-        weights[3] = 6;
-        this.benefits= new int[numOfInputs];
-        benefits[0] = 4;
-        benefits[1] = 6;
-        benefits[2] = 3;
-        benefits[3] = 3;
+        this.initialize();
     }
 
 
@@ -66,11 +57,10 @@ public class SolutionsMNG {
     }
 
     // Evaluate individual fitness
-    public int fitnessfunction(String binary, int[] weights, int[] benefits) {
-        int w = 0, b = 0;
+    public int fitnessfunction(String binary, int[] benefits) {
+        int b = 0;
         for (int i = 0; i < binary.length(); i++) {
             if (binary.charAt(i) == '1') {
-                w += weights[i];
                 b += benefits[i];
             }
         }
@@ -78,22 +68,40 @@ public class SolutionsMNG {
     }
 
     // Calculate fitness function for all individuals
-    public int[] calcAllFintenss() {
+    public int[] calcAllFintenss(int[] benefits) {
         int[] fitnessValues = new int[numOfInd];
         for (int i = 0; i < numOfInd; i++) {
-            fitnessValues[i] = fitnessfunction(individuals[i], weights, benefits);
+            fitnessValues[i] = fitnessfunction(individuals[i],benefits);
         }
         return fitnessValues;
     }
+    // Setters and Getters
+    public int getNumOfInd() {
+		return numOfInd;
+	}
 
-    public static void main(String args[]) {
-        SolutionsMNG s = new SolutionsMNG(4, 4);
-        s.initialize();
-        s.print();
-        int[] fintessValues = s.calcAllFintenss();
-        Selection obj = new Selection(s.numOfInd);
-        obj.doSelection(s.individuals, fintessValues);
-        //Crossover obj = new Crossover(s.individuals);
-        //obj.performCrossover("multi");
+
+	public void setNumOfInd(int numOfInd) {
+		this.numOfInd = numOfInd;
+	}
+
+
+	public int getNumOfInputs() {
+		return numOfInputs;
+	}
+
+
+	public void setNumOfInputs(int numOfInputs) {
+		this.numOfInputs = numOfInputs;
+	}
+
+
+	public void setIndividuals(String[] individuals) {
+		this.individuals = individuals;
+	}
+
+    public String[] getIndividuals() {
+    	return this.individuals;
     }
+    
 }

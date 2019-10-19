@@ -4,31 +4,33 @@ import java.util.Random;
 public class Selection {
 
     // Variables
-    private int numOfInd, numOfSelection;
+    private int numOfSelection;
+    private String[] binary;
 
-    public Selection(int numOfInd) {
-        this.numOfInd = numOfInd;
-        this.numOfSelection = 4; // We will change this value later
+    // Constructor
+    public Selection(String[] binary , int numOfSelection) {
+        this.numOfSelection = numOfSelection; // We will change this value later
+        this.binary = binary;
     }
 
-    public void doSelection(String[] binary, int[] fitnessValues) {
+    // Selection Process
+    public String [] doSelection(int[] fitnessValues) {
         int totalweight = 0;
-        String[] choosenelements = new String[numOfInd];
+        String[] choosenelements = new String[numOfSelection];
         for (int i = 0; i < fitnessValues.length; i++) {
             totalweight += fitnessValues[i];
         }
-        int partialsum = 0;
         Random rg = new Random();
-        int Random = rg.nextInt(totalweight - 1);
-        for (int j = fitnessValues.length - 1; j >= 0; j--) {
-        	while (partialsum <= Random) {
-                partialsum += fitnessValues[j];
-            }
-            choosenelements[j] = binary[j];
+        for (int i = 0 ; i < numOfSelection; i++) {
+        	int partialsum=0, random, index = 0, lastAddedIndex = 0;
+        	random = rg.nextInt(totalweight - 1);
+			while(partialsum < random) {
+				partialsum+= fitnessValues[index];
+				lastAddedIndex = index;
+                index++;
+			}
+			choosenelements[i]=binary[lastAddedIndex];
         }
-        for (int h = 0; h < numOfInd; h++) {
-        	System.out.println("choosen");
-        	System.out.println(choosenelements[h]);
-        }
+        return choosenelements;
     }
 }
