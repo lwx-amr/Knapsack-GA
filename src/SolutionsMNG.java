@@ -75,6 +75,34 @@ public class SolutionsMNG {
         }
         return fitnessValues;
     }
+    
+    // Get best indivivdual between some of them
+    public String getBestInd(String [] inds, String currentBest, int [] benefits, int [] weights, int S) {
+		String best = currentBest;
+		int maxBenefit = fitnessfunction(currentBest,benefits), currentBenefit;
+		for (int i = 0; i < inds.length; i++) {
+			if(isValid(inds[i], weights, S)){
+				currentBenefit = fitnessfunction(inds[i],benefits);
+				if( currentBenefit > maxBenefit ){
+					maxBenefit = currentBenefit;
+					best = inds[i];
+				}
+			}
+        }
+		return best;
+	}
+    
+    // Check if solution valid 
+    public boolean isValid(String binary, int [] weights, int S){
+    	int b = 0;
+        for (int i = 0; i < binary.length(); i++) {
+            if (binary.charAt(i) == '1') {
+                b += weights[i];
+            }
+        }
+    	return (b<=S);
+    }
+    
     // Setters and Getters
     public int getNumOfInd() {
 		return numOfInd;

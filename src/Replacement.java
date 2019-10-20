@@ -17,19 +17,19 @@ public class Replacement {
 	
 	// To perform elitism replacement
 	public String [] perfomReplacment(){
-		System.out.println("\n ------------ before ------------ ");
+		/*System.out.println("\n ------------ before ------------ ");
         for (int j = 0; j < individuals.length; j++) {
         	System.out.print(sMNG.fitnessfunction(individuals[j], benefits) + "  ");
-        }
+        }*/
 		sortDESC();
-		System.out.println("\n ------------ After ------------ ");
+		/*System.out.println("\n ------------ After ------------ ");
 		for (int j = 0; j < individuals.length; j++) {
         	System.out.print(sMNG.fitnessfunction(individuals[j], benefits) + "  ");
-        }
+        }*/
 		 
-        System.out.println("\n ----------- After Sort ------------- ");
+        /*System.out.println("\n ----------- After Sort ------------- ");
         sMNG.print();
-        
+        */
 		// Remove lowest
         int index = 0;
 		for (int j = newGeneration.length -1; j > 0 && index < mutatedOffsprings.length ; j--) {
@@ -37,10 +37,10 @@ public class Replacement {
 			index++;
         }
 		
-		System.out.println("\n ------------ Before Sub ------------ ");
+		/*System.out.println("\n ------------ Before Sub ------------ ");
 		for (int j = 0; j < newGeneration.length; j++) {
         	System.out.println(newGeneration[j] + "  " + sMNG.fitnessfunction(newGeneration[j], benefits));
-        }
+        }*/
 		return newGeneration;
 	}
 
