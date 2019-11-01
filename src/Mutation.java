@@ -4,10 +4,12 @@ public class Mutation {
 	
 	// Variables
 	private String[] chromosomes;
+	private SolutionsMNG sMNG;
 	
 	// Constructor 
-	public Mutation(String [] inputs){
+	public Mutation(String [] inputs, SolutionsMNG sMNG){
 		chromosomes = inputs;
+		this.sMNG = sMNG;
 	}
 	  
     // Return inputs after mutation process
@@ -46,8 +48,13 @@ public class Mutation {
     
     // Do Mutation for all offsprings
     public String [] performMutation() {
+    	String currentInd;
     	for(int i = 0 ; i < chromosomes.length ; i++) {
-    		chromosomes[i] = changeChromosome(chromosomes[i]);
+    		currentInd = changeChromosome(chromosomes[i]);
+        	while(!sMNG.isValid(currentInd)) {
+        		currentInd = changeChromosome(chromosomes[i]);
+        	}
+    		chromosomes[i] = currentInd;
     	} 
     	return chromosomes;
     }

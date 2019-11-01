@@ -4,22 +4,31 @@ import java.util.Random;
 public class SolutionsMNG {
 
     // Variables
-    private int numOfInd, numOfInputs;
+    private int numOfInd, numOfInputs, S;
     private String[] individuals;
+    private int[] benefits, weights;
     
     // Constructor
-    public SolutionsMNG(int numOfIndividuals, int numOfInputs) {
+    public SolutionsMNG(int numOfIndividuals, int numOfInputs, int[] benefits, int[] weights, int S) {
         this.numOfInd = numOfIndividuals;
         this.numOfInputs = numOfInputs;
         this.individuals = new String[numOfInd];
+        this.benefits = benefits;
+        this.weights = weights;
+        this.S = S;
         this.initialize();
     }
 
 
     // Initialize first random solutions
     public void initialize() {
+    	String currentInd;
         for (int i = 0; i < numOfInd; i++) {
-            individuals[i] = generateInd();
+        	currentInd = generateInd();
+        	while(!isValid(currentInd)) {
+        		currentInd = generateInd();
+        	}
+        	individuals[i] = currentInd;
         }
     }
 
@@ -57,7 +66,7 @@ public class SolutionsMNG {
     }
 
     // Evaluate individual fitness
-    public int fitnessfunction(String binary, int[] benefits) {
+    public int fitnessfunction(String binary) {
         int b = 0;
         for (int i = 0; i < binary.length(); i++) {
             if (binary.charAt(i) == '1') {
@@ -68,21 +77,21 @@ public class SolutionsMNG {
     }
 
     // Calculate fitness function for all individuals
-    public int[] calcAllFintenss(int[] benefits) {
+    public int[] calcAllFintenss() {
         int[] fitnessValues = new int[numOfInd];
         for (int i = 0; i < numOfInd; i++) {
-            fitnessValues[i] = fitnessfunction(individuals[i],benefits);
+            fitnessValues[i] = fitnessfunction(individuals[i]);
         }
         return fitnessValues;
     }
     
     // Get best indivivdual between some of them
-    public String getBestInd(String [] inds, String currentBest, int [] benefits, int [] weights, int S) {
+    public String getBestInd(String [] inds, String currentBest) {
 		String best = currentBest;
-		int maxBenefit = fitnessfunction(currentBest,benefits), currentBenefit;
+		int maxBenefit = fitnessfunction(currentBest), currentBenefit;
 		for (int i = 0; i < inds.length; i++) {
-			if(isValid(inds[i], weights, S)){
-				currentBenefit = fitnessfunction(inds[i],benefits);
+			if(isValid(inds[i])){
+				currentBenefit = fitnessfunction(inds[i]);
 				if( currentBenefit > maxBenefit ){
 					maxBenefit = currentBenefit;
 					best = inds[i];
@@ -93,7 +102,7 @@ public class SolutionsMNG {
 	}
     
     // Check if solution valid 
-    public boolean isValid(String binary, int [] weights, int S){
+    public boolean isValid(String binary){
     	int b = 0;
         for (int i = 0; i < binary.length(); i++) {
             if (binary.charAt(i) == '1') {

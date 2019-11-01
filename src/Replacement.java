@@ -2,15 +2,13 @@
 public class Replacement {
 
 	// Variable
-	private String [] newGeneration, mutatedOffsprings, individuals;
-	private int [] benefits;
+	private String [] newGeneration, mutatedOffsprings, individuals;;
 	private SolutionsMNG sMNG;
 	
 	// Constructor
-	public Replacement(String[] individuals, String[] mutatedOffsprings, int [] benefits, SolutionsMNG sMNG){
+	public Replacement(String[] individuals, String[] mutatedOffsprings, SolutionsMNG sMNG){
 		this.setIndividuals(individuals);
 		this.setMutatedOffsprings(mutatedOffsprings);
-		this.setBenefits(benefits);
 		this.sMNG = sMNG;
 		this.newGeneration = individuals;
 	}
@@ -49,7 +47,7 @@ public class Replacement {
 		int n = individuals.length; 
         for (int i = 0; i < n-1; i++) 
             for (int j = 0; j < n-i-1; j++) 
-                if (sMNG.fitnessfunction(individuals[j], benefits) < sMNG.fitnessfunction(individuals[j+1], benefits)) {
+                if (sMNG.fitnessfunction(individuals[j]) < sMNG.fitnessfunction(individuals[j+1])) {
                     String tempS = individuals[j]; 
                     individuals[j] = individuals[j+1]; 
                     individuals[j+1] = tempS;   
@@ -72,13 +70,4 @@ public class Replacement {
 	public void setMutatedOffsprings(String [] mutatedOffsprings) {
 		this.mutatedOffsprings = mutatedOffsprings;
 	}
-
-	public int [] getBenefits() {
-		return benefits;
-	}
-
-	public void setBenefits(int [] benefits) {
-		this.benefits = benefits;
-	}
-	
 }
